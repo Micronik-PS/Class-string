@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 // ‘ункци€ вывода количества символов в слове (не счита€ 0 детерминатор)
-int word_n(const char*const arr)
+int word_n(const char* const arr)
 {
 	int i = 0;
 	while (!(arr[i] == '\0'))
@@ -92,7 +92,7 @@ public:
 	{
 		return word;
 	}
-	//ƒеконструктор, удал€ющий динамический массив с пам€ти
+	//ƒеконструктор, удал€ющий динамический массив с пам€ти/
 	~str()
 	{
 		delete[] word;
@@ -106,7 +106,4 @@ void foo(str o)
 //-------------------------------
 int main()
 {
-	str W;
-	W = "Xerox";
-	cout << W + "V1";
 }
