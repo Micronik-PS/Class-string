@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-// Функция вывода количества символов в слове (не считая 0 детерминатор)
+// Function output count symbols in word
 int word_n(const char* const arr)
 {
 	int i = 0;
@@ -10,22 +10,22 @@ int word_n(const char* const arr)
 	}
 	return i;
 }
-//Класс string
+//Class string
 class str
 {
 	int size;
 	char* word;
 
 public:
-	//Конструктор (стандартный)
+	//Constructor (standart)
 	str() {}
-	//Конструктор копирования
+	//Constructor copy
 	str(str& other)
 	{
 		size = other.size;
 		word = other.word;
 	}
-	//Перегрузка оператора = для строки
+	//Overload operator = for string
 	void operator=(const char* const arr)
 	{
 		size = word_n(arr) + 1;
@@ -35,7 +35,7 @@ public:
 			word[i] = arr[i];
 		}
 	}
-	//Перегрузка оператора = для str
+	//Overload operator = for str
 	char* operator=(str& other)
 	{
 		if (!(word == nullptr))
@@ -51,12 +51,12 @@ public:
 		}
 		return word;
 	}
-	//Перегрузка оператора <<
+	//Overload operator << (DANGEON)
 	char* output()
 	{
 		return word;
 	}
-	//Перегрузка оператора +
+	//Overload operator + for string
 	char* operator+(const char* const arr)
 	{
 		int size = word_n(word) + word_n(arr) + 1;
@@ -77,10 +77,7 @@ public:
 			j++;
 		}
 		dual_arr[size - 1] = '\0';
-		char* time = dual_arr;
-		/*delete[]dual_arr;
-		dual_arr = nullptr;*/
-		return time;
+		return dual_arr;
 	}
 	//Get_Size
 	int Get_Size()
@@ -92,7 +89,7 @@ public:
 	{
 		return word;
 	}
-	//Деконструктор, удаляющий динамический массив с памяти/
+	//Deconstructor, delete Dynamic array with memory
 	~str()
 	{
 		delete[] word;
