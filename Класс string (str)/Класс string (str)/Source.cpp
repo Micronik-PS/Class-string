@@ -31,7 +31,7 @@ public:
 		str[size] = '\0';
 	}
 	MyString& operator = (const char* const str) {
-		Dead();
+		Dead(*this);
 		int size = strlen(str);
 		this->str = new char[size + 1];
 		for (int i = 0; i < size; i++)
@@ -43,7 +43,7 @@ public:
 	}
 	// A = B;
 	MyString& operator = (const MyString& other) {
-		Dead();
+		Dead(*this);
 		int size = strlen(other.str);
 		str = new char[size + 1];
 		for (int i = 0; i < size; i++)
@@ -55,36 +55,43 @@ public:
 	}
 	// A + "Text"
 	MyString operator + (const char*const str) {
-		char Duo_Str_Arr[255];
-		int j = 0;
 		int size_object = strlen(this->str);
 		int size_str = strlen(str);
+		int size = size_object + size_str;
+		MyString Duo_Str;
+		Dead(Duo_Str);
+		Duo_Str.str = new char[size+1];
+		int j = 0;
 		for (int i = 0; i < size_object;i++,j++) {
-			Duo_Str_Arr[j] = (this->str)[i];
+			Duo_Str.str[j] = (this->str)[i];
 		}
 		for (int i = 0; i < size_str; i++, j++) {
-			Duo_Str_Arr[j] = str[i];
+			Duo_Str.str[j] = str[i];
 		}
-		Duo_Str_Arr[size_object + size_str] = '\0';
-		MyString Duo_Str = Duo_Str_Arr;
+		Duo_Str.str[size] = '\0';
+		
 		return Duo_Str;
 	}
 	// A + B
 	MyString operator + (const MyString& other) {
-		char Duo_Str_Arr[255];
-		int j = 0;
 		int size_this_object = strlen(str);
 		int size_other_object = strlen(other.str);
+		int size = size_this_object + size_other_object;
+		MyString Duo_Str;
+		Dead(Duo_Str);
+		Duo_Str.str = new char[size + 1];
+		int j = 0;
 		for (int i = 0; i < size_this_object; i++, j++) {
-			Duo_Str_Arr[j] = str[i];
+			Duo_Str.str[j] = str[i];
 		}
 		for (int i = 0; i < size_other_object; i++, j++) {
-			Duo_Str_Arr[j] = other.str[i];
+			Duo_Str.str[j] = other.str[i];
 		}
-		Duo_Str_Arr[size_this_object + size_other_object] = '\0';
-		MyString Duo_Str = Duo_Str_Arr;
+		Duo_Str.str[size] = '\0';
+
 		return Duo_Str;
 	}
+	// cout << A;
 	
 
 	// Output str;
@@ -103,13 +110,12 @@ public:
 private:
 	char* str=nullptr;
 	//Check Alive Word
-	void Dead() {
-		if (str != nullptr) {
-			delete[]str;
+	void Dead(const MyString& object) {
+		if (object.str != nullptr) {
+			delete[]object.str;
 		}
 	}
 };
 
 int main() {
-
 }
