@@ -1,42 +1,54 @@
 #include <iostream>
 using namespace std;
-// Function output count symbols in word
-int word_n(const char* const arr)
-{
-	int i = 0;
-	while (!(arr[i] == '\0'))
-	{
-		i++;
-	}
-	return i;
-}
 //Class string
 class str
 {
-	int size;
+	int size=0;
 	char* word;
 
 public:
 	//Constructor (standart)
-	str() {}
+	str() {
+		word = new char[size+1];
+		word[0] = '\0';
+	}
 	//Constructor copy
-	str(str& other)
+	str(const str& other)
 	{
 		size = other.size;
-		word = other.word;
+		word = new char[size + 1];
+		for (int i = 0; i < size + 1; i++)
+		{
+			word[i] = other.word[i];
+		}
 	}
+	//Constructor char
+	str(const char* const arr) {
+		size = strlen(arr);
+		word = new char[size+1];
+		for (int i = 0; i < size+1; i++)
+		{
+			word[i] = arr[i];
+		}
+	}
+
 	//Overload operator = for string
 	void operator=(const char* const arr)
 	{
-		size = word_n(arr) + 1;
-		word = new char[size];
-		for (int i = 0; i < size; i++)
+		if (!(word == nullptr))
+		{
+			delete[] word;
+			word = nullptr;
+		}
+		size = strlen(arr);
+		word = new char[size+1];
+		for (int i = 0; i < size+1; i++)
 		{
 			word[i] = arr[i];
 		}
 	}
 	//Overload operator = for str
-	char* operator=(str& other)
+	char* operator=(const str other)
 	{
 		if (!(word == nullptr))
 		{
@@ -44,23 +56,18 @@ public:
 			word = nullptr;
 		}
 		size = other.size;
-		word = new char[size];
-		for (int i = 0; i < size; i++)
+		word = new char[size+1];
+		for (int i = 0; i < size+1; i++)
 		{
 			word[i] = other.word[i];
 		}
 		return word;
 	}
-	//Overload operator << (DANGEON)
-	char* output()
+	//Operator overload + for string
+	char* operator+(const char*const arr)
 	{
-		return word;
-	}
-	//Overload operator + for string
-	char* operator+(const char* const arr)
-	{
-		int size = word_n(word) + word_n(arr) + 1;
-		char* dual_arr = new char[size];
+		int size = strlen(word) + strlen(arr);
+		char* dual_arr = new char[size+1];
 		int i = 0;
 		int j = 0;
 		while (word[j] != '\0')
@@ -76,7 +83,30 @@ public:
 			i++;
 			j++;
 		}
-		dual_arr[size - 1] = '\0';
+		dual_arr[size] = '\0';
+		return dual_arr;
+	}
+	//Operator overload + for str
+	char* operator+(const str& other)
+	{
+		int size = strlen(word) + strlen(other.word);
+		char* dual_arr = new char[size+1];
+		int i = 0;
+		int j = 0;
+		while (word[j] != '\0')
+		{
+			dual_arr[i] = word[j];
+			i++;
+			j++;
+		}
+		j = 0;
+		while (other.word[j] != '\0')
+		{
+			dual_arr[i] = other.word[j];
+			i++;
+			j++;
+		}
+		dual_arr[size] = '\0';
 		return dual_arr;
 	}
 	//Get_Size
@@ -96,11 +126,11 @@ public:
 		word = nullptr;
 	}
 };
-void foo(str o)
-{
-	cout << o.output();
-}
 //-------------------------------
 int main()
 {
+	str a;
+	a = "A";
+	str b = a;
+	cout << b.Get_Word();
 }
