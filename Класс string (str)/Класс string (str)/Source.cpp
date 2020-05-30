@@ -91,8 +91,42 @@ public:
 
 		return Duo_Str;
 	}
-	// cout << A;
-	
+	// A == B
+	bool operator==(const MyString& other) {
+		if (strlen(str) == strlen(other.str)) {
+			int size = strlen(str);
+			for (int i = 0; i < size; i++)
+			{
+				if (str[i] != other.str[i]) {
+					return false;
+				}
+			}
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	// A != B
+	bool operator!=(const MyString& other) {
+		if (strlen(str) == strlen(other.str)) {
+			int size = strlen(str);
+			for (int i = 0; i < size; i++)
+			{
+				if (str[i] != other.str[i]) {
+					return true;
+				}
+			}
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+	//// cout << A;
+	//char* operator <<(const MyString&other) {
+	//	return str;
+	//}
 
 	// Output str;
 	void print() {
@@ -118,4 +152,7 @@ private:
 };
 
 int main() {
+	MyString A = "One";
+	MyString B = "One";
+	
 }
