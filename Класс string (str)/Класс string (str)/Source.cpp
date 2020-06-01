@@ -127,7 +127,10 @@ public:
 	//char* operator <<(const MyString&other) {
 	//	return str;
 	//}
-
+	// A[];
+	char& operator[](const int number) {
+		return str[number];
+	}
 	// Output str;
 	void print() {
 		int size = strlen(str);
@@ -152,7 +155,4 @@ private:
 };
 
 int main() {
-	MyString A = "One";
-	MyString B = "One";
-	
 }
