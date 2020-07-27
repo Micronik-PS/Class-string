@@ -24,10 +24,11 @@ public:
 		}
 		this->word[size] = '\0';
 	}
-	/*String(const String&& object) {
-		
+	String(String&& object) {
+		size = object.size; 
 		word = object.word;
-	}*/
+		object.word = nullptr;
+	}
 	~String(){
 		delete[]word;
 		word = nullptr;
@@ -98,9 +99,4 @@ private:
 };
 
 int main() {
-	String a="bd";
-	String b = "bs";
-	String c = "c";
-	a = b+c;
-	cout << a.lenght() << b.lenght() << c.lenght();
 }
